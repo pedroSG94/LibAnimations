@@ -12,26 +12,31 @@ public class RotationAnimation extends BaseAnimation {
 
   private AnimatorSet mAnimationSet;
 
-  private float xPivot = 0;
-  private float yPivot = 0;
+  private Float xPivot = null;
+  private Float yPivot = null;
   private int duration;
   private int degrees ;
   private int delay ;
 
-  public RotationAnimation(int duration, int degrees, int delay){
+  public RotationAnimation(int duration, int degrees, int delay, Float xPivot, Float yPivot){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
     this.degrees = degrees;
     this.delay = delay;
+    this.xPivot = xPivot;
+    this.yPivot = yPivot;
   }
 
   @Override
   public void startAnimation(View v) {
+    if(xPivot == null)  xPivot = (float)v.getWidth() / 2;
+    if(yPivot == null)  yPivot = (float)v.getHeight() / 2;
     ObjectAnimator animator = ObjectAnimator.ofFloat(v, "rotation", v.getRotation() + degrees);
     animator.setDuration(duration);
     animator.setStartDelay(delay);
-    mAnimationSet.play(animator);
+    mAnimationSet.playTogether(animator, ObjectAnimator.ofFloat(v, "pivotX", xPivot),
+        ObjectAnimator.ofFloat(v, "pivotY", yPivot));
     mAnimationSet.start();
   }
 

@@ -14,29 +14,34 @@ public class ScaleXYAnimation extends BaseAnimation{
 
   private float xScale;
   private float yScale;
-  private float xPivot = 0;
-  private float yPivot = 0;
+  private Float xPivot = null;
+  private Float yPivot = null;
   private int duration;
   private int delay;
 
-  public ScaleXYAnimation(int duration, float xScale, float yScale, int delay){
+  public ScaleXYAnimation(int duration, float xScale, float yScale, int delay, Float xPivot, Float yPivot){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
     this.xScale = xScale;
     this.yScale = yScale;
     this.delay = delay;
+    this.xPivot = xPivot;
+    this.yPivot = yPivot;
   }
 
   @Override
   public void startAnimation(View v) {
+    if(xPivot == null)  xPivot = (float)v.getWidth() / 2;
+    if(yPivot == null)  yPivot = (float)v.getHeight() / 2;
     ObjectAnimator animatorX = ObjectAnimator.ofFloat(v, "scaleX", xScale);
     ObjectAnimator animatorY = ObjectAnimator.ofFloat(v, "scaleY", yScale);
     animatorX.setDuration(duration);
     animatorX.setStartDelay(delay);
     animatorY.setDuration(duration);
     animatorY.setStartDelay(delay);
-    mAnimationSet.playTogether(animatorX, animatorY);
+    mAnimationSet.playTogether(animatorX, animatorY, ObjectAnimator.ofFloat(v, "pivotX", xPivot),
+        ObjectAnimator.ofFloat(v, "pivotY", yPivot));
     mAnimationSet.start();
   }
 

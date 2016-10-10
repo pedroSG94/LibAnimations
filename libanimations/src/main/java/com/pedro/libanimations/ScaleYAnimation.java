@@ -13,25 +13,30 @@ public class ScaleYAnimation extends BaseAnimation {
   private AnimatorSet mAnimationSet;
 
   private float yScale;
-  private float xPivot;
-  private float yPivot;
+  private Float xPivot = null;
+  private Float yPivot = null;
   private int duration;
   private int delay;
 
-  public ScaleYAnimation(int duration, float yScale, int delay){
+  public ScaleYAnimation(int duration, float yScale, int delay, Float xPivot, Float yPivot){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
     this.yScale = yScale;
     this.delay = delay;
+    this.xPivot = xPivot;
+    this.yPivot = yPivot;
   }
 
   @Override
   public void startAnimation(View v) {
+    if(xPivot == null)  xPivot = (float)v.getWidth() / 2;
+    if(yPivot == null)  yPivot = (float)v.getHeight() / 2;
     ObjectAnimator animator = ObjectAnimator.ofFloat(v, "scaleY", yScale);
     animator.setDuration(duration);
     animator.setStartDelay(delay);
-    mAnimationSet.play(animator);
+    mAnimationSet.playTogether(animator, ObjectAnimator.ofFloat(v, "pivotX", xPivot),
+        ObjectAnimator.ofFloat(v, "pivotY", yPivot));
     mAnimationSet.start();
   }
 

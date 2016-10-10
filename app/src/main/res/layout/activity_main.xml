@@ -21,11 +21,11 @@
       />
   <Button
       android:text="Button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_alignEnd="@+id/text"
-      android:layout_marginBottom="50dp"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginBottom="55dp"
       android:id="@+id/button"
+      android:layout_alignParentBottom="true"
+      android:layout_alignEnd="@+id/text_view"
       />
 </RelativeLayout>
