@@ -5,31 +5,33 @@ import android.animation.ObjectAnimator;
 import android.view.View;
 
 /**
- * Created by pedro on 7/10/16.
+ * Created by pedro on 10/10/16.
  */
 
-public class TranslationXYAnimation extends  BaseAnimation{
+public class ScaleXYAnimation extends BaseAnimation{
 
   private AnimatorSet mAnimationSet;
 
-  private float xDistance;
-  private float yDistance;
-  private int duration = 0;
-  private int delay = 0;
+  private float xScale;
+  private float yScale;
+  private float xPivot = 0;
+  private float yPivot = 0;
+  private int duration;
+  private int delay;
 
-  public TranslationXYAnimation(int duration, float xDistance, float yDistance, int delay){
+  public ScaleXYAnimation(int duration, float xScale, float yScale, int delay){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
-    this.xDistance = xDistance;
-    this.yDistance = yDistance;
+    this.xScale = xScale;
+    this.yScale = yScale;
     this.delay = delay;
   }
 
   @Override
   public void startAnimation(View v) {
-    ObjectAnimator animatorX = ObjectAnimator.ofFloat(v, "translationX", xDistance);
-    ObjectAnimator animatorY = ObjectAnimator.ofFloat(v, "translationY", yDistance);
+    ObjectAnimator animatorX = ObjectAnimator.ofFloat(v, "scaleX", xScale);
+    ObjectAnimator animatorY = ObjectAnimator.ofFloat(v, "scaleY", yScale);
     animatorX.setDuration(duration);
     animatorX.setStartDelay(delay);
     animatorY.setDuration(duration);
@@ -48,20 +50,20 @@ public class TranslationXYAnimation extends  BaseAnimation{
     mAnimationSet.end();
   }
 
-  public float getxDistance() {
-    return xDistance;
+  public float getxScale() {
+    return xScale;
   }
 
-  public void setxDistance(float xDistance) {
-    this.xDistance = xDistance;
+  public void setxScale(float xScale) {
+    this.xScale = xScale;
   }
 
-  public float getyDistance() {
-    return yDistance;
+  public float getyScale() {
+    return yScale;
   }
 
-  public void setyDistance(float yDistance) {
-    this.yDistance = yDistance;
+  public void setyScale(float yScale) {
+    this.yScale = yScale;
   }
 
   public int getDuration() {

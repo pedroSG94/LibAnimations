@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.pedro.libanimations.TranslationXYAnimation;
+import com.pedro.libanimations.ScaleXYAnimation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        TranslationXYAnimation animation = new TranslationXYAnimation(1000, 105f, -105f, 200);
+        ScaleXYAnimation animation = new ScaleXYAnimation(1000, 105f, 105f, 200);
         animation.startAnimation(button);
       }
     });

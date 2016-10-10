@@ -5,30 +5,30 @@ import android.animation.ObjectAnimator;
 import android.view.View;
 
 /**
- * Created by pedro on 7/10/16.
+ * Created by pedro on 10/10/16.
  */
 
-public class VisibilityAnimation extends BaseAnimation {
+public class ScaleXAnimation extends BaseAnimation {
 
   private AnimatorSet mAnimationSet;
 
-  private float alphaStart;
-  private float alphaEnd;
-  private int duration = 0;
-  private int delay = 0;
+  private float xScale;
+  private float xPivot = 0;
+  private float yPivot = 0;
+  private int duration;
+  private int delay;
 
-  public VisibilityAnimation(int duration, float alphaStart, float alphaEnd, int delay){
+  public ScaleXAnimation(int duration, float xScale, int delay){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
-    this.alphaStart = alphaStart;
-    this.alphaEnd = alphaEnd;
+    this.xScale = xScale;
     this.delay = delay;
   }
 
   @Override
-  public void startAnimation(View v){
-    ObjectAnimator animator = ObjectAnimator.ofFloat(v, "alpha", alphaStart, alphaEnd);
+  public void startAnimation(View v) {
+    ObjectAnimator animator = ObjectAnimator.ofFloat(v, "scaleX", xScale);
     animator.setDuration(duration);
     animator.setStartDelay(delay);
     mAnimationSet.play(animator);
@@ -36,7 +36,7 @@ public class VisibilityAnimation extends BaseAnimation {
   }
 
   @Override
-  public void cancelAnimation(){
+  public void cancelAnimation() {
     mAnimationSet.cancel();
   }
 
@@ -45,20 +45,28 @@ public class VisibilityAnimation extends BaseAnimation {
     mAnimationSet.end();
   }
 
-  public float getAlphaStart() {
-    return alphaStart;
+  public float getxScale() {
+    return xScale;
   }
 
-  public void setAlphaStart(float alphaStart) {
-    this.alphaStart = alphaStart;
+  public void setxScale(float xScale) {
+    this.xScale = xScale;
   }
 
-  public float getAlphaEnd() {
-    return alphaEnd;
+  public float getxPivot() {
+    return xPivot;
   }
 
-  public void setAlphaEnd(float alphaEnd) {
-    this.alphaEnd = alphaEnd;
+  public void setxPivot(float xPivot) {
+    this.xPivot = xPivot;
+  }
+
+  public float getyPivot() {
+    return yPivot;
+  }
+
+  public void setyPivot(float yPivot) {
+    this.yPivot = yPivot;
   }
 
   public int getDuration() {

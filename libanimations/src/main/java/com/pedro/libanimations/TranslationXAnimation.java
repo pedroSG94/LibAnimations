@@ -12,22 +12,21 @@ public class TranslationXAnimation extends BaseAnimation {
 
   private AnimatorSet mAnimationSet;
 
-  private float xDisplacement;
-  private float yDisplacement;
+  private float xDistance;
   private int duration = 0;
   private int delay = 0;
 
-  public TranslationXAnimation(int duration, float xDisplacement, int delay){
+  public TranslationXAnimation(int duration, float xDistance, int delay){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
-    this.xDisplacement = xDisplacement;
+    this.xDistance = xDistance;
     this.delay = delay;
   }
 
   @Override
   public void startAnimation(View v) {
-    ObjectAnimator animatorX = ObjectAnimator.ofFloat(v, "translationX", xDisplacement);
+    ObjectAnimator animatorX = ObjectAnimator.ofFloat(v, "translationX", xDistance);
     animatorX.setDuration(duration);
     animatorX.setStartDelay(delay);
     mAnimationSet.play(animatorX);
@@ -42,5 +41,29 @@ public class TranslationXAnimation extends BaseAnimation {
   @Override
   public void stopAnimation() {
     mAnimationSet.end();
+  }
+
+  public float getxDistance() {
+    return xDistance;
+  }
+
+  public void setxDistance(float xDistance) {
+    this.xDistance = xDistance;
+  }
+
+  public int getDuration() {
+    return duration;
+  }
+
+  public void setDuration(int duration) {
+    this.duration = duration;
+  }
+
+  public int getDelay() {
+    return delay;
+  }
+
+  public void setDelay(int delay) {
+    this.delay = delay;
   }
 }
