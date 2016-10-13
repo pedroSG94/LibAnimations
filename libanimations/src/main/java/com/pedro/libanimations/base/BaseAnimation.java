@@ -1,4 +1,4 @@
-package com.pedro.libanimations;
+package com.pedro.libanimations.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -30,6 +30,7 @@ public abstract class BaseAnimation {
       public void onAnimationEnd(Animator animation) {
         super.onAnimationEnd(animation);
         Log.i(TAG, "End");
+        onFinish();
       }
     });
   }
@@ -37,4 +38,5 @@ public abstract class BaseAnimation {
   public abstract void startAnimation(View v);
   public abstract void cancelAnimation();
   public abstract void stopAnimation();
+  public abstract void onFinish();
 }

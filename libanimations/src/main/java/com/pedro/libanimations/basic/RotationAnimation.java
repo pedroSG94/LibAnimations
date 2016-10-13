@@ -1,28 +1,29 @@
-package com.pedro.libanimations;
+package com.pedro.libanimations.basic;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.view.View;
+import com.pedro.libanimations.base.BaseAnimation;
 
 /**
- * Created by pedro on 10/10/16.
+ * Created by pedro on 7/10/16.
  */
 
-public class ScaleXAnimation extends BaseAnimation {
+public class RotationAnimation extends BaseAnimation {
 
   private AnimatorSet mAnimationSet;
 
-  private float xScale;
   private Float xPivot = null;
   private Float yPivot = null;
   private int duration;
-  private int delay;
+  private int degrees ;
+  private int delay ;
 
-  public ScaleXAnimation(int duration, float xScale, int delay, Float xPivot, Float yPivot){
+  public RotationAnimation(int duration, int degrees, int delay, Float xPivot, Float yPivot){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
-    this.xScale = xScale;
+    this.degrees = degrees;
     this.delay = delay;
     this.xPivot = xPivot;
     this.yPivot = yPivot;
@@ -32,7 +33,7 @@ public class ScaleXAnimation extends BaseAnimation {
   public void startAnimation(View v) {
     if(xPivot == null)  xPivot = (float)v.getWidth() / 2;
     if(yPivot == null)  yPivot = (float)v.getHeight() / 2;
-    ObjectAnimator animator = ObjectAnimator.ofFloat(v, "scaleX", xScale);
+    ObjectAnimator animator = ObjectAnimator.ofFloat(v, "rotation", degrees);
     animator.setDuration(duration);
     animator.setStartDelay(delay);
     mAnimationSet.playTogether(animator, ObjectAnimator.ofFloat(v, "pivotX", xPivot),
@@ -50,12 +51,9 @@ public class ScaleXAnimation extends BaseAnimation {
     mAnimationSet.end();
   }
 
-  public float getxScale() {
-    return xScale;
-  }
+  @Override
+  public void onFinish() {
 
-  public void setxScale(float xScale) {
-    this.xScale = xScale;
   }
 
   public float getxPivot() {
@@ -80,6 +78,14 @@ public class ScaleXAnimation extends BaseAnimation {
 
   public void setDuration(int duration) {
     this.duration = duration;
+  }
+
+  public int getDegrees() {
+    return degrees;
+  }
+
+  public void setDegrees(int degrees) {
+    this.degrees = degrees;
   }
 
   public int getDelay() {

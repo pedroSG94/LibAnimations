@@ -1,28 +1,29 @@
-package com.pedro.libanimations;
+package com.pedro.libanimations.basic;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.view.View;
+import com.pedro.libanimations.base.BaseAnimation;
 
 /**
- * Created by pedro on 7/10/16.
+ * Created by pedro on 10/10/16.
  */
 
-public class RotationAnimation extends BaseAnimation {
+public class ScaleYAnimation extends BaseAnimation {
 
   private AnimatorSet mAnimationSet;
 
+  private float yScale;
   private Float xPivot = null;
   private Float yPivot = null;
   private int duration;
-  private int degrees ;
-  private int delay ;
+  private int delay;
 
-  public RotationAnimation(int duration, int degrees, int delay, Float xPivot, Float yPivot){
+  public ScaleYAnimation(int duration, float yScale, int delay, Float xPivot, Float yPivot){
     super();
     mAnimationSet = getmAnimationSet();
     this.duration = duration;
-    this.degrees = degrees;
+    this.yScale = yScale;
     this.delay = delay;
     this.xPivot = xPivot;
     this.yPivot = yPivot;
@@ -32,7 +33,7 @@ public class RotationAnimation extends BaseAnimation {
   public void startAnimation(View v) {
     if(xPivot == null)  xPivot = (float)v.getWidth() / 2;
     if(yPivot == null)  yPivot = (float)v.getHeight() / 2;
-    ObjectAnimator animator = ObjectAnimator.ofFloat(v, "rotation", v.getRotation() + degrees);
+    ObjectAnimator animator = ObjectAnimator.ofFloat(v, "scaleY", yScale);
     animator.setDuration(duration);
     animator.setStartDelay(delay);
     mAnimationSet.playTogether(animator, ObjectAnimator.ofFloat(v, "pivotX", xPivot),
@@ -48,6 +49,19 @@ public class RotationAnimation extends BaseAnimation {
   @Override
   public void stopAnimation() {
     mAnimationSet.end();
+  }
+
+  @Override
+  public void onFinish() {
+
+  }
+
+  public float getyScale() {
+    return yScale;
+  }
+
+  public void setyScale(float yScale) {
+    this.yScale = yScale;
   }
 
   public float getxPivot() {
@@ -72,14 +86,6 @@ public class RotationAnimation extends BaseAnimation {
 
   public void setDuration(int duration) {
     this.duration = duration;
-  }
-
-  public int getDegrees() {
-    return degrees;
-  }
-
-  public void setDegrees(int degrees) {
-    this.degrees = degrees;
   }
 
   public int getDelay() {

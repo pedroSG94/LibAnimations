@@ -1,8 +1,9 @@
-package com.pedro.libanimations;
+package com.pedro.libanimations.basic;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.view.View;
+import com.pedro.libanimations.base.BaseAnimation;
 
 /**
  * Created by pedro on 7/10/16.
@@ -27,7 +28,7 @@ public class VisibilityAnimation extends BaseAnimation {
   }
 
   @Override
-  public void startAnimation(View v){
+  public void startAnimation(View v) {
     ObjectAnimator animator = ObjectAnimator.ofFloat(v, "alpha", alphaStart, alphaEnd);
     animator.setDuration(duration);
     animator.setStartDelay(delay);
@@ -43,6 +44,11 @@ public class VisibilityAnimation extends BaseAnimation {
   @Override
   public void stopAnimation() {
     mAnimationSet.end();
+  }
+
+  @Override
+  public void onFinish() {
+
   }
 
   public float getAlphaStart() {

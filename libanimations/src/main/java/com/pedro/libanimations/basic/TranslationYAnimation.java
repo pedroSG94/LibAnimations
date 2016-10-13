@@ -1,14 +1,15 @@
-package com.pedro.libanimations;
+package com.pedro.libanimations.basic;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.view.View;
+import com.pedro.libanimations.base.BaseAnimation;
 
 /**
  * Created by pedro on 7/10/16.
  */
 
-public class TranslationYAnimation extends BaseAnimation{
+public class TranslationYAnimation extends BaseAnimation {
 
   private AnimatorSet mAnimationSet;
 
@@ -41,6 +42,11 @@ public class TranslationYAnimation extends BaseAnimation{
   @Override
   public void stopAnimation() {
     mAnimationSet.end();
+  }
+
+  @Override
+  public void onFinish() {
+
   }
 
   public float getyDistance() {
